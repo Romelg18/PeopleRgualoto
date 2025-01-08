@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PeopleRgualoto.ViewModels"
+             x:Class="PeopleRgualoto.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModelRgualoto />
+    </ContentPage.BindingContext>
+
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="0" Padding="10" CornerRadius="10" BackgroundColor="Green">
+            <StackLayout>
+                <Label Text="Romel Gualoto" FontAttributes="Italic" />
+                <Label Text="22" />
+                <Image Source="image.jpg" HeightRequest="50" WidthRequest="50" />
+            </StackLayout>
+        </Frame>
+
+        <Entry x:Name="rgualoto_entry" Text="{Binding NewPersonName}" 
+               Placeholder="Ingrese un nombre" Grid.Row="1" />
+
+        <StackLayout Orientation="Horizontal" Grid.Row="2" Spacing="15">
+            <Button Text="Agregar a Nueva Persona" Command="{Binding AddPersonCommand}" />
+            
+            
+            
+            <Button Text="Mostrar todas las Personas ingresadas" Command="{Binding GetPeopleCommand}" />
+        </StackLayout>
+
+        <CollectionView x:Name="rgualoto_list" ItemsSource="{Binding People}" Grid.Row="3">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Label Text="{Binding Id}" />
+                        <Label Grid.Column="1" Text="{Binding Name}" />
+                        <Button Grid.Column="2" Text="Eliminar" Command="{Binding DeletePersonCommand}" CommandParameter="{Binding Id}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label x:Name="rgualoto_statusLabel" 
+               Text="{Binding StatusMessage}" 
+               TextColor="Blue" Grid.Row="12" />
+    </Grid>
+
+</ContentPage>
