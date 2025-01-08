@@ -69,7 +69,7 @@ namespace PeopleRgualoto
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Error al eliminar el registro: {ex.Message}";
+                StatusMessage = $"Error al eliminar el registro deseado: {ex.Message}";
             }
         }
     }
